@@ -3,17 +3,74 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="">
-		<title>Zed</title>
+
+		<meta
+			name="description"
+			content="Task Tracker helps users organize projects, tasks, and deadlines."
+		>
+
+		<title>Task Tracker</title>
+
 		<link rel="stylesheet" href="css/styles.css">
-        
 	</head>
+
 	<body>
 		<main>
-			<h1>Zed</h1>
+			<header>
+				<h1>Task Tracker</h1>
+				<p>Keep track of your projects, tasks, and deadlines in one place.</p>
+			</header>
+
+			<section aria-labelledby="add-task-heading">
+				<h2 id="add-task-heading">Add a Task</h2>
+
+				<form id="task-form">
+
+					<div>
+						<label for="project-name">Project Name</label>
+						<input
+							type="text"
+							id="project-name"
+							name="project-name"
+							required
+						>
+					</div>
+
+					<div>
+						<label for="task-name">Task Name</label>
+						<input
+							type="text"
+							id="task-name"
+							name="task-name"
+							required
+						>
+					</div>
+
+					<div>
+						<label for="due-date">Due Date</label>
+						<input
+							type="date"
+							id="due-date"
+							name="due-date"
+							required
+						>
+					</div>
+
+					<button type="submit">Add Task</button>
+				</form>
+			</section>
+
+			<section aria-labelledby="tasks-heading">
+				<h2 id="tasks-heading">My Tasks</h2>
+
+				<p id="empty-message">
+					No tasks yet. Add your first task above.
+				</p>
+
+				<div id="task-list"></div>
+			</section>
 		</main>
 
 		<script src="js/app.js" defer></script>
 	</body>
 </html>
-
