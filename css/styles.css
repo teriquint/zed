@@ -255,9 +255,6 @@ form button {
     color: var(--color-purple-dark);
 }
 
-
-/* COMPLETED TASK */
-
 /* COMPLETED TASK */
 
 .task-completed {
@@ -279,7 +276,18 @@ form button {
     color: #160A24;
 }
 
+/* COMPLETED PROJECT */
 
+.project-completed .project-heading {
+    background-color: var(--color-academic-aqua);
+    border-left: none;
+    border-radius: 18px;
+    padding: 1.25rem;
+}
+
+.project-completed .project-card {
+    display: none;
+}
 /* DETAILS AREA */
 
 .task-details {

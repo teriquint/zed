@@ -269,7 +269,7 @@ function displayTasks() {
         }
 
         let projectHTML = `
-            <section class="project-section">
+            <section class="project-section ${project.completed ? "project-completed" : ""}">
 
                 <div class="project-heading">
 
