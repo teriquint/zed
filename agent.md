@@ -2,27 +2,26 @@
 
 ## Where I Am
 
-The basic HTML form is complete, and JavaScript can now create and display a task on the page.
+The HTML form is complete, tasks can be created, and tasks are now saved in localStorage.
 
 ## What Is Working
 
-- The Task Tracker page loads.
 - Users can enter a Project Name.
 - Users can enter a Task Name.
 - Users can choose a Due Date.
-- Clicking Add Task creates a new task card.
-- The task appears under My Tasks.
-- The empty-state message disappears after a task is added.
-- The form clears after submission.
+- Clicking Add Task creates and displays a task.
+- The form clears after a task is added.
+- Tasks are saved in localStorage.
+- Saved tasks remain after the page is refreshed.
+- The empty-state message appears when there are no tasks.
 
 ## What Is Not Working Yet
 
-- Tasks disappear when the page refreshes.
-- localStorage is not connected yet.
 - Date comparison is not working yet.
 - Tasks are not labeled Overdue, Due Today, or Upcoming.
-- Tasks cannot be marked complete or deleted yet.
+- Tasks cannot be marked complete yet.
+- Tasks cannot be deleted yet.
 
 ## Next Step
 
-Save tasks in localStorage so they remain after a page refresh.
+Use JavaScript dates to compare each due date with today's date and assign a deadline status.
