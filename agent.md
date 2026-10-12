@@ -2,26 +2,24 @@
 
 ## Where I Am
 
-The HTML form is complete, tasks can be created, and tasks are now saved in localStorage.
+The basic Task Tracker MVP is working through task creation, saving, and deadline comparison.
 
 ## What Is Working
 
-- Users can enter a Project Name.
-- Users can enter a Task Name.
-- Users can choose a Due Date.
+- Users can enter a project name, task name, and due date.
 - Clicking Add Task creates and displays a task.
-- The form clears after a task is added.
 - Tasks are saved in localStorage.
-- Saved tasks remain after the page is refreshed.
-- The empty-state message appears when there are no tasks.
+- Tasks remain after the page is refreshed.
+- Dates display in a readable format such as October 16, 2026.
+- JavaScript compares task due dates with the current date.
+- Tasks are labeled Overdue, Due Today, or Upcoming.
 
 ## What Is Not Working Yet
 
-- Date comparison is not working yet.
-- Tasks are not labeled Overdue, Due Today, or Upcoming.
 - Tasks cannot be marked complete yet.
 - Tasks cannot be deleted yet.
+- Completed tasks are not identified separately.
 
 ## Next Step
 
-Use JavaScript dates to compare each due date with today's date and assign a deadline status.
+Add a Mark Complete button that updates the task and saves the change in localStorage.

@@ -1,65 +1,117 @@
+let tasks = [];
+
 const form = document.getElementById("task-form");
-const projectNameInput = document.getElementById("project-name");
-const taskNameInput = document.getElementById("task-name");
-const dueDateInput = document.getElementById("due-date");
 const taskList = document.getElementById("task-list");
 const emptyMessage = document.getElementById("empty-message");
 
-let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+function addTask(event) {
+  event.preventDefault();
 
-function saveTasks() {
-	localStorage.setItem("tasks", JSON.stringify(tasks));
+  const projectName = document.getElementById("project-name").value.trim();
+  const taskName = document.getElementById("task-name").value.trim();
+  const dueDate = document.getElementById("due-date").value;
+
+  if (!projectName || !taskName || !dueDate) {
+    return;
+  }
+
+  const task = {
+    projectName: projectName,
+    taskName: taskName,
+    dueDate: dueDate
+  };
+
+  tasks.push(task);
+  saveTasks();
+  form.reset();
+
+  displayTasks();
+}
+
+function formatDate(dueDate) {
+  const parts = dueDate.split("-");
+
+  const year = parts[0];
+  const month = parts[1];
+  const day = parts[2];
+
+  const date = new Date(year, month - 1, day);
+
+  return date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric"
+  });
+}
+
+function getDeadlineStatus(dueDate) {
+  const parts = dueDate.split("-");
+
+  const year = parts[0];
+  const month = parts[1];
+  const day = parts[2];
+
+  const taskDate = new Date(year, month - 1, day);
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  if (taskDate < today) {
+    return "Overdue";
+  }
+
+  if (taskDate.getTime() === today.getTime()) {
+    return "Due Today";
+  }
+
+  return "Upcoming";
 }
 
 function displayTasks() {
-	taskList.innerHTML = "";
+  taskList.innerHTML = "";
 
-	if (tasks.length === 0) {
-		emptyMessage.hidden = false;
-		return;
-	}
+  if (tasks.length === 0) {
+    emptyMessage.hidden = false;
+    return;
+  }
 
-	emptyMessage.hidden = true;
+  emptyMessage.hidden = true;
 
-	tasks.forEach(function (task) {
-		const taskCard = document.createElement("article");
-
-		const taskTitle = document.createElement("h3");
-		taskTitle.textContent = task.taskName;
-
-		const projectInfo = document.createElement("p");
-		projectInfo.textContent = `Project: ${task.projectName}`;
-
-		const dueInfo = document.createElement("p");
-		dueInfo.textContent = `Due: ${task.dueDate}`;
-
-		taskCard.appendChild(taskTitle);
-		taskCard.appendChild(projectInfo);
-		taskCard.appendChild(dueInfo);
-
-		taskList.appendChild(taskCard);
-	});
+  tasks.forEach(function(task) {
+    taskList.innerHTML += `
+      <article class="task-card">
+        <h3>${task.taskName}</h3>
+        <p>Project: ${task.projectName}</p>
+        <p>Due: ${formatDate(task.dueDate)}</p>
+        <p>Status: ${getDeadlineStatus(task.dueDate)}</p>
+      </article>
+    `;
+  });
 }
 
-form.addEventListener("submit", function (event) {
-	event.preventDefault();
+function saveTasks() {
+  try {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  } catch (error) {
+    alert("Unable to save tasks. Storage may be disabled.");
+  }
+}
 
-	const projectName = projectNameInput.value.trim();
-	const taskName = taskNameInput.value.trim();
-	const dueDate = dueDateInput.value;
+function loadTasks() {
+  try {
+    const saved = localStorage.getItem("tasks");
 
-	const newTask = {
-		projectName: projectName,
-		taskName: taskName,
-		dueDate: dueDate
-	};
+    if (saved) {
+      tasks = JSON.parse(saved);
+    } else {
+      tasks = [];
+    }
+  } catch (error) {
+    tasks = [];
+  }
+}
 
-	tasks.push(newTask);
+form.addEventListener("submit", addTask);
 
-	saveTasks();
-	displayTasks();
-
-	form.reset();
-});
-
+loadTasks();
 displayTasks();

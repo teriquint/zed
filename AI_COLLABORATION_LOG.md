@@ -38,3 +38,15 @@ I used ChatGPT to help me change Task Tracker so tasks are saved in the browser 
 I learned that localStorage stores information as text. `JSON.stringify()` changes my tasks array into text so it can be saved, and `JSON.parse()` changes the saved text back into a JavaScript array when the page loads.
 
 I tested the feature by adding multiple tasks and refreshing the page. The tasks were still there after the refresh.
+
+## Conversation 4: Comparing Deadlines with JavaScript Dates
+
+I used ChatGPT to help me learn how JavaScript can compare a task due date with the current date.
+
+### What I learned
+
+I learned that the date from the form can be separated into year, month, and day and turned into a JavaScript Date object. I also learned that JavaScript months begin with 0, so the month has to be adjusted by subtracting 1.
+
+The app sets the current time to midnight before comparing dates so the time of day does not accidentally make a task due today appear overdue.
+
+I tested the feature with a past date, today's date, and a future date. The app correctly displayed Overdue, Due Today, and Upcoming.
