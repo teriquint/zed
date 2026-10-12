@@ -8,15 +8,17 @@ function addTask(event) {
     event.preventDefault();
 
     const projectName = document.getElementById("project-name").value.trim();
+    const projectDueDate = document.getElementById("project-due-date").value;
     const taskName = document.getElementById("task-name").value.trim();
     const dueDate = document.getElementById("due-date").value;
 
-    if (!projectName || !taskName || !dueDate) {
+    if (!projectName || !projectDueDate || !taskName || !dueDate) {
         return;
     }
 
     const task = {
         projectName: projectName,
+        projectDueDate: projectDueDate,
         taskName: taskName,
         dueDate: dueDate,
         completed: false
@@ -45,6 +47,21 @@ function formatDate(dueDate) {
     });
 }
 
+function getMonthYear(dueDate) {
+    const parts = dueDate.split("-");
+
+    const year = parts[0];
+    const month = parts[1];
+    const day = parts[2];
+
+    const date = new Date(year, month - 1, day);
+
+    return date.toLocaleDateString("en-US", {
+        month: "long",
+        year: "numeric"
+    });
+}
+
 function getDeadlineStatus(dueDate) {
     const parts = dueDate.split("-");
 
@@ -67,12 +84,14 @@ function getDeadlineStatus(dueDate) {
 
     return "Upcoming";
 }
+
 function toggleComplete(index) {
     tasks[index].completed = !tasks[index].completed;
 
     saveTasks();
     displayTasks();
 }
+
 function deleteTask(index) {
     const task = tasks[index];
 
@@ -93,29 +112,94 @@ function displayTasks() {
 
     emptyMessage.hidden = true;
 
-    tasks.forEach(function (task, index) {
-        let status = getDeadlineStatus(task.dueDate);
+    const projects = [];
 
-        if (task.completed) {
-            status = "Completed";
+    tasks.forEach(function(task, index) {
+        let matchingProject = null;
+
+        for (let i = 0; i < projects.length; i++) {
+            if (
+                projects[i].projectName === task.projectName &&
+                projects[i].projectDueDate === task.projectDueDate
+            ) {
+                matchingProject = projects[i];
+            }
         }
 
-        taskList.innerHTML += `
-    <article class="task-card">
-        <h3>${task.taskName}</h3>
-        <p>Project: ${task.projectName}</p>
-        <p>Due: ${formatDate(task.dueDate)}</p>
-        <p>Status: ${status}</p>
+        if (!matchingProject) {
+            matchingProject = {
+                projectName: task.projectName,
+                projectDueDate: task.projectDueDate,
+                tasks: []
+            };
 
-        <button onclick="toggleComplete(${index})">
-            ${task.completed ? "Mark Incomplete" : "Mark Complete"}
-        </button>
+            projects.push(matchingProject);
+        }
 
-        <button onclick="deleteTask(${index})">
-            Delete
-        </button>
-    </article>
-  `;
+        matchingProject.tasks.push({
+            task: task,
+            index: index
+        });
+    });
+
+    projects.sort(function(a, b) {
+        return new Date(a.projectDueDate) - new Date(b.projectDueDate);
+    });
+
+    let currentMonth = "";
+
+    projects.forEach(function(project) {
+        const monthYear = getMonthYear(project.projectDueDate);
+
+        if (monthYear !== currentMonth) {
+            taskList.innerHTML += `
+                <h2 class="month-heading">${monthYear}</h2>
+            `;
+
+            currentMonth = monthYear;
+        }
+
+        let projectHTML = `
+            <article class="project-card">
+                <h3>${project.projectName}</h3>
+                <p>Project Due: ${formatDate(project.projectDueDate)}</p>
+
+                <div class="project-tasks">
+        `;
+
+        project.tasks.forEach(function(item) {
+            const task = item.task;
+            const index = item.index;
+
+            let status = getDeadlineStatus(task.dueDate);
+
+            if (task.completed) {
+                status = "Completed";
+            }
+
+            projectHTML += `
+                <section class="task-item">
+                    <h4>${task.taskName}</h4>
+                    <p>Task Due: ${formatDate(task.dueDate)}</p>
+                    <p>Status: ${status}</p>
+
+                    <button onclick="toggleComplete(${index})">
+                        ${task.completed ? "Mark Incomplete" : "Mark Complete"}
+                    </button>
+
+                    <button onclick="deleteTask(${index})">
+                        Delete
+                    </button>
+                </section>
+            `;
+        });
+
+        projectHTML += `
+                </div>
+            </article>
+        `;
+
+        taskList.innerHTML += projectHTML;
     });
 }
 
