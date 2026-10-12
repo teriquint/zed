@@ -73,6 +73,15 @@ function toggleComplete(index) {
     saveTasks();
     displayTasks();
 }
+function deleteTask(index) {
+    const task = tasks[index];
+
+    if (confirm(`Delete "${task.taskName}"?`)) {
+        tasks.splice(index, 1);
+        saveTasks();
+        displayTasks();
+    }
+}
 
 function displayTasks() {
     taskList.innerHTML = "";
@@ -93,13 +102,18 @@ function displayTasks() {
 
         taskList.innerHTML += `
     <article class="task-card">
-      <h3>${task.taskName}</h3>
-      <p>Project: ${task.projectName}</p>
-      <p>Due: ${formatDate(task.dueDate)}</p>
-      <p>Status: ${status}</p>
-      <button onclick="toggleComplete(${index})">
-        ${task.completed ? "Mark Incomplete" : "Mark Complete"}
-      </button>
+        <h3>${task.taskName}</h3>
+        <p>Project: ${task.projectName}</p>
+        <p>Due: ${formatDate(task.dueDate)}</p>
+        <p>Status: ${status}</p>
+
+        <button onclick="toggleComplete(${index})">
+            ${task.completed ? "Mark Incomplete" : "Mark Complete"}
+        </button>
+
+        <button onclick="deleteTask(${index})">
+            Delete
+        </button>
     </article>
   `;
     });

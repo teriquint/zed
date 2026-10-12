@@ -50,3 +50,13 @@ I learned that the date from the form can be separated into year, month, and day
 The app sets the current time to midnight before comparing dates so the time of day does not accidentally make a task due today appear overdue.
 
 I tested the feature with a past date, today's date, and a future date. The app correctly displayed Overdue, Due Today, and Upcoming.
+
+## Debugging Session: Tasks Not Displaying
+
+After adding the completed-task feature, new tasks stopped appearing on the page.
+
+I used ChatGPT to help review my JavaScript. The problem was a missing closing curly brace at the end of the displayTasks() function. Because the function was not closed correctly, the browser stopped running the rest of the JavaScript.
+
+### What I learned
+
+I learned that one missing brace can stop an entire JavaScript file from working. I also learned to check the browser console and look closely at where functions begin and end when something suddenly stops working.
