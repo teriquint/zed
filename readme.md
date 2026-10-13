@@ -2,7 +2,6 @@
 
 Task Tracker is a web application I created for Project Zed in WRIT 40363. I wanted to create something that could help me keep track of multiple projects/events, tasks, and deadlines all in one place. I am always looking for better ways to organize my daily work.
 
-
 ## MVP
 
 In my app you can do the following:
@@ -16,7 +15,6 @@ In my app you can do the following:
 - Delete a task
 - Mark a project complete
 - Keep projects and tasks saved after refreshing the page
-
 
 ## New Technique
 

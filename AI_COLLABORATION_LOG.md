@@ -1,62 +1,39 @@
 # AI Collaboration Log
 
-## Project
+## How I Used AI
 
-Task Tracker
+I used ChatGPT during Project Zed for troubleshooting, brainstorming, and helping me take some of my ideas a little further. I knew that I wanted to build something that would be useful to me in the workplace. I used AI for help when I got stuck or when I wanted to see if an idea I had was possible with the JavaScript I already knew.
 
-## AI Tools Used
+## Planning the Project
 
-- ChatGPT
-- GitHub Copilot in VS Code
+At the beginning, I used ChatGPT to help me narrow down my idea and make sure it was something I could realistically complete for the project. It was very helpful for brainstorming and knowing my limitations. My original idea was a pretty basic task tracker. As I worked on it, I started thinking of ways to make it more useful, like creating a project once and then choosing it from a dropdown instead of entering the same project information every time. I learned this in our favorites tracker creation and I really like this feature. It saves time and also eliminates misspellings.
 
-## Conversation 1: Planning and Project Setup
+## Debugging a JavaScript Error
 
-I used ChatGPT to help me narrow my original ideas into a task and deadline tracker that was small enough to complete for Project Zed. I decided that the app would be designed for people managing multiple projects and deadlines.
+One of the most helpful times I used AI was when my tasks suddenly stopped displaying. I shared my JavaScript and ChatGPT found that I was missing a closing curly brace. It was a very small error, but it stopped the rest of the code from working and I could not find the error. That was helpful because it reminded me how one missing character can affect a much larger section of JavaScript. It also helped me learn to look at where functions begin and end when I am troubleshooting.
 
-We separated the MVP from the stretch goals so I would not try to build too much at once. I decided that my new technique would be using JavaScript dates to compare and organize deadlines.
+## Troubleshooting GitHub Pages
 
-ChatGPT also helped me organize the repository requirements and the first version of my agent.md file.
+I also used AI when my live GitHub Pages site was not loading the way I expected again. The repository was working, but I realized I needed to make sure GitHub Pages was turned on correctly and that the live site was linked from the About section of the repository. Working through that with AI was helpful because it was not really a coding problem. It was more about understanding how the repository and the live page connect.
 
-### What I learned
+## Going Beyond the Basic Requirements
 
-I learned that an MVP does not need to include every feature I eventually want. The most important part is getting one core feature completely working before adding extras.
+Once the main part of the app was working, I used AI to help me think through some enhancements that went beyond the basic assignment.
 
-## Conversation 2: Creating a Task
+Some of those enhancements include:
 
-I used ChatGPT to help me connect my HTML form to JavaScript so a task appears on the page after the form is submitted.
+- organizing tasks by project
+- creating an active project dropdown
+- adding task details
+- automatically moving past due tasks to the top
+- moving completed tasks to the bottom
+- collapsing a project when it is completed
+- adding optional notes to a completed project
 
-### What I learned
+## Learning Something New
 
-I learned that `event.preventDefault()` stops the form from refreshing the page, and that JavaScript can create new HTML elements with `document.createElement()`.
+The biggest new technique for me was working with JavaScript dates. I used AI to help me understand how JavaScript could compare a task due date with today's date and decide whether the task was Past Due, Due Today, or In Process. I also color coded the cards for this. I used that same idea to help organize the tasks by priority. This was probably the part of the project where AI helped me move to the next level beyond what I had done in my earlier projects.
 
-## Conversation 3: Saving Tasks with localStorage
+## What I Learned About Using AI
 
-I used ChatGPT to help me change Task Tracker so tasks are saved in the browser instead of disappearing when the page refreshes.
-
-### What I learned
-
-I learned that localStorage stores information as text. `JSON.stringify()` changes my tasks array into text so it can be saved, and `JSON.parse()` changes the saved text back into a JavaScript array when the page loads.
-
-I tested the feature by adding multiple tasks and refreshing the page. The tasks were still there after the refresh.
-
-## Conversation 4: Comparing Deadlines with JavaScript Dates
-
-I used ChatGPT to help me learn how JavaScript can compare a task due date with the current date.
-
-### What I learned
-
-I learned that the date from the form can be separated into year, month, and day and turned into a JavaScript Date object. I also learned that JavaScript months begin with 0, so the month has to be adjusted by subtracting 1.
-
-The app sets the current time to midnight before comparing dates so the time of day does not accidentally make a task due today appear overdue.
-
-I tested the feature with a past date, today's date, and a future date. The app correctly displayed Overdue, Due Today, and Upcoming.
-
-## Debugging Session: Tasks Not Displaying
-
-After adding the completed-task feature, new tasks stopped appearing on the page.
-
-I used ChatGPT to help review my JavaScript. The problem was a missing closing curly brace at the end of the displayTasks() function. Because the function was not closed correctly, the browser stopped running the rest of the JavaScript.
-
-### What I learned
-
-I learned that one missing brace can stop an entire JavaScript file from working. I also learned to check the browser console and look closely at where functions begin and end when something suddenly stops working.
+AI was the most helpful to me when I already have an idea or a problem that I was trying to solve. I was able to use it to troubleshoot areas or to give me ideas on how I could enhance my projec without going too much above what I already learned. It was helpful for finding small coding mistakes that are really hard to find once you have been looking at the same coding for a long time and everything looks the same. 
