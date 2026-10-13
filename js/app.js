@@ -38,7 +38,8 @@ function addProject(event) {
     const project = {
         projectName: projectName,
         projectDueDate: projectDueDate,
-        completed: false
+        completed: false,
+        notes: ""
     };
 
     projects.push(project);
@@ -162,6 +163,22 @@ function getDeadlineStatus(dueDate) {
 }
 
 
+function getTaskPriority(task) {
+    if (task.completed) {
+        return 2;
+    }
+
+    const status =
+        getDeadlineStatus(task.dueDate);
+
+    if (status === "Past Due") {
+        return 0;
+    }
+
+    return 1;
+}
+
+
 function displayProjectOptions() {
     projectSelect.innerHTML =
         '<option value="">Choose a project</option>';
@@ -219,6 +236,42 @@ function toggleTaskDetails(index) {
 }
 
 
+function toggleProjectNotes(index) {
+    const notesArea =
+        document.getElementById(
+            `project-notes-${index}`
+        );
+
+    const notesButton =
+        document.getElementById(
+            `project-notes-button-${index}`
+        );
+
+    if (notesArea.hidden) {
+        notesArea.hidden = false;
+        notesButton.textContent = "Hide Notes";
+    } else {
+        notesArea.hidden = true;
+        notesButton.textContent = "Notes";
+    }
+}
+
+
+function saveProjectNotes(index) {
+    const notesInput =
+        document.getElementById(
+            `project-notes-input-${index}`
+        );
+
+    projects[index].notes =
+        notesInput.value.trim();
+
+    saveProjects();
+
+    alert("Project notes saved.");
+}
+
+
 function deleteTask(index) {
     const task = tasks[index];
 
@@ -269,7 +322,11 @@ function displayTasks() {
         }
 
         let projectHTML = `
-            <section class="project-section ${project.completed ? "project-completed" : ""}">
+            <section
+                class="project-section ${project.completed
+                    ? "project-completed"
+                    : ""}"
+            >
 
                 <div class="project-heading">
 
@@ -294,7 +351,46 @@ function displayTasks() {
                             ? "Reopen Project"
                             : "Complete Project"}
                     </button>
+        `;
 
+
+        if (project.completed) {
+            projectHTML += `
+                <button
+                    id="project-notes-button-${projectIndex}"
+                    onclick="toggleProjectNotes(${projectIndex})"
+                >
+                    Notes
+                </button>
+
+                <div
+                    id="project-notes-${projectIndex}"
+                    class="project-notes"
+                    hidden
+                >
+                    <label
+                        for="project-notes-input-${projectIndex}"
+                    >
+                        Project Notes
+                    </label>
+
+                    <textarea
+                        id="project-notes-input-${projectIndex}"
+                        rows="4"
+                        placeholder="Add optional notes about this completed project..."
+                    >${project.notes ? project.notes : ""}</textarea>
+
+                    <button
+                        onclick="saveProjectNotes(${projectIndex})"
+                    >
+                        Save Notes
+                    </button>
+                </div>
+            `;
+        }
+
+
+        projectHTML += `
                 </div>
 
                 <article class="project-card">
@@ -302,95 +398,121 @@ function displayTasks() {
                     <div class="project-tasks">
         `;
 
-        let projectHasTasks = false;
 
-        tasks.forEach(function(task, index) {
-            if (task.projectName === project.projectName) {
-                projectHasTasks = true;
+        let projectTasks = tasks
+            .map(function(task, index) {
+                return {
+                    task: task,
+                    index: index
+                };
+            })
+            .filter(function(item) {
+                return item.task.projectName ===
+                    project.projectName;
+            })
+            .sort(function(a, b) {
+                const priorityA =
+                    getTaskPriority(a.task);
 
-                let status =
-                    getDeadlineStatus(task.dueDate);
+                const priorityB =
+                    getTaskPriority(b.task);
 
-                let statusClass =
-                    "task-in-process";
-
-                if (status === "Past Due") {
-                    statusClass =
-                        "task-overdue";
+                if (priorityA !== priorityB) {
+                    return priorityA - priorityB;
                 }
 
-                if (task.completed) {
-                    status =
-                        "Completed";
+                return new Date(a.task.dueDate) -
+                    new Date(b.task.dueDate);
+            });
 
-                    statusClass =
-                        "task-completed";
-                }
 
-                projectHTML += `
-                    <section
-                        class="task-item ${statusClass}"
-                    >
+        let projectHasTasks =
+            projectTasks.length > 0;
 
-                        <h4>
-                            ${task.taskName}
-                        </h4>
 
-                        <p>
-                            Task Due:
-                            ${formatDate(task.dueDate)}
-                        </p>
+        projectTasks.forEach(function(item) {
+            const task = item.task;
+            const index = item.index;
 
-                        <p>
-                            Status:
-                            ${status}
-                        </p>
+            let status =
+                getDeadlineStatus(task.dueDate);
 
-                        <button
-                            id="details-button-${index}"
-                            onclick="toggleTaskDetails(${index})"
-                        >
-                            Details
-                        </button>
+            let statusClass =
+                "task-in-process";
 
-                        <button
-                            onclick="toggleComplete(${index})"
-                        >
-                            ${task.completed
-                                ? "Mark Incomplete"
-                                : "Mark Complete"}
-                        </button>
-
-                        <button
-                            onclick="deleteTask(${index})"
-                        >
-                            Delete
-                        </button>
-
-                        <div
-                            id="task-details-${index}"
-                            class="task-details"
-                            hidden
-                        >
-
-                            <p>
-                                <strong>
-                                    Details:
-                                </strong>
-                            </p>
-
-                            <p>
-                                ${task.details
-                                    ? task.details
-                                    : "No details have been added for this task."}
-                            </p>
-
-                        </div>
-
-                    </section>
-                `;
+            if (status === "Past Due") {
+                statusClass =
+                    "task-overdue";
             }
+
+            if (task.completed) {
+                status =
+                    "Completed";
+
+                statusClass =
+                    "task-completed";
+            }
+
+            projectHTML += `
+                <section
+                    class="task-item ${statusClass}"
+                >
+
+                    <h4>
+                        ${task.taskName}
+                    </h4>
+
+                    <p>
+                        Task Due:
+                        ${formatDate(task.dueDate)}
+                    </p>
+
+                    <p>
+                        Status:
+                        ${status}
+                    </p>
+
+                    <button
+                        id="details-button-${index}"
+                        onclick="toggleTaskDetails(${index})"
+                    >
+                        Details
+                    </button>
+
+                    <button
+                        onclick="toggleComplete(${index})"
+                    >
+                        ${task.completed
+                            ? "Mark Incomplete"
+                            : "Mark Complete"}
+                    </button>
+
+                    <button
+                        onclick="deleteTask(${index})"
+                    >
+                        Delete
+                    </button>
+
+                    <div
+                        id="task-details-${index}"
+                        class="task-details"
+                        hidden
+                    >
+                        <p>
+                            <strong>Details:</strong>
+                        </p>
+
+                        <p>
+                            ${task.details
+                                ? task.details
+                                : "No details have been added for this task."}
+                        </p>
+                    </div>
+
+                </section>
+            `;
         });
+
 
         if (!projectHasTasks) {
             projectHTML += `
@@ -400,6 +522,7 @@ function displayTasks() {
                 </p>
             `;
         }
+
 
         projectHTML += `
                     </div>
