@@ -36,4 +36,4 @@ The biggest new technique for me was working with JavaScript dates. I used AI to
 
 ## What I Learned About Using AI
 
-AI was the most helpful to me when I already had an idea or a problem that I was trying to solve. I was able to use it to troubleshoot areas or to give me ideas on how I could enhance my projec without going too much above what I already learned. It was helpful for finding small coding mistakes that are really hard to find once you have been looking at the same coding for a long time and everything looks the same. 
+AI was the most helpful to me when I already had an idea or a problem that I was trying to solve. I was able to use it to troubleshoot areas or to give me ideas on how I could enhance my project without going too much above what I already learned. It was helpful for finding small coding mistakes that are really hard to find once you have been looking at the same coding for a long time and everything looks the same. 
