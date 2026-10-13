@@ -32,8 +32,8 @@ Some of those enhancements include:
 
 ## Learning Something New
 
-The biggest new technique for me was working with JavaScript dates. I used AI to help me understand how JavaScript could compare a task due date with today's date and decide whether the task was Past Due, Due Today, or In Process. I also color coded the cards for this. I used that same idea to help organize the tasks by priority. This was probably the part of the project where AI helped me move to the next level beyond what I had done in my earlier projects.
+The biggest new technique for me was working with JavaScript dates. I used AI to help me understand how JavaScript could compare a task due date with today's date and decide whether the task was Past Due, Due Today, or In Process. I also color coded the cards for this. I used that same idea to help organize the tasks by priority. I wanted to understand what the Date code was actually doing instead of just adding it, so I used AI to walk through how the task date was compared to today's date and why setting the time to midnight made the comparison work. This was probably the part of the project where AI helped me move to the next level beyond what I had done in my earlier projects.
 
 ## What I Learned About Using AI
 
-AI was the most helpful to me when I already have an idea or a problem that I was trying to solve. I was able to use it to troubleshoot areas or to give me ideas on how I could enhance my projec without going too much above what I already learned. It was helpful for finding small coding mistakes that are really hard to find once you have been looking at the same coding for a long time and everything looks the same. 
+AI was the most helpful to me when I already had an idea or a problem that I was trying to solve. I was able to use it to troubleshoot areas or to give me ideas on how I could enhance my projec without going too much above what I already learned. It was helpful for finding small coding mistakes that are really hard to find once you have been looking at the same coding for a long time and everything looks the same. 

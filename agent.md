@@ -2,7 +2,7 @@
 
 ## Where I Am
 
-The main parts of my Task Tracker are working and complete. I started with a basic task tracker, but as I tested it I made changes that made the app more useful and easier to organize. It was hepful to test it and see what was working and what was still needed. I am now doing the final testing, cleaning up the design and style, and finishing the documentation for the project.
+The main parts of my Task Tracker are working and mostly complete. I started with a basic task tracker, but as I tested it I made changes that made the app more useful and easier to organize. It was helpful to test it and see what was working and what was still needed. I am now doing the final testing, cleaning up the design and style, and finishing the documentation for the project.
 
 ## What Is Working
 
