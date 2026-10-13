@@ -1,21 +1,25 @@
 # Task Tracker
 
-Task Tracker is a web application created for Project Zed in WRIT 40363.
+Task Tracker is a web application I created for Project Zed in WRIT 40363.
 
-The app is designed to help users organize projects, tasks, and deadlines in one place.
+I wanted to create something that could help me keep track of multiple projects/events, tasks, and deadlines all in one place. I am always looking for better ways to organize my daily work.
 
 ## MVP
 
-Users will be able to:
+In my app you can do the following:
 
-- Add a project name
-- Add a task
-- Add a due date
-- See whether a task is overdue, due today, or upcoming
+- Add a project and project due date
+- Add tasks to an active project
+- Add a task due date
+- Add optional details to a task
+- See if a task is past due, due today, or in process
 - Mark a task complete
 - Delete a task
-- Keep saved tasks after refreshing the page
+- Mark a project complete
+- Keep projects and tasks saved after refreshing the page
 
 ## New Technique
 
-My new technique is using JavaScript dates to compare and organize deadlines.
+My new technique was using JavaScript dates to compare and organize deadlines.
+
+I used dates to determine if a task is past due, due today, or still in process. I also used the dates to help organize the projects and tasks by deadline and color code so I could see visually where I was at.
