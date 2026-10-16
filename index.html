@@ -24,20 +24,12 @@
 
 <body>
 
-    <div class="workspace-photo">
-        <img
-            src="images/office-background.jpg"
-            alt=""
-            aria-hidden="true"
-        >
-    </div>
-
-
     <main class="app-shell">
 
         <header class="app-header">
 
-            <div>
+            <div class="header-copy">
+
                 <p class="eyebrow">
                     TASK TRACKER
                 </p>
@@ -51,13 +43,18 @@
                     Organize projects, tasks, and deadlines
                     in one simple workspace.
                 </p>
+
             </div>
 
-            <div
-                class="header-mark"
-                aria-hidden="true"
-            >
-                ✓
+
+            <div class="header-graphic">
+
+                <img
+                    src="images/office-background.jpg"
+                    alt=""
+                    aria-hidden="true"
+                >
+
             </div>
 
         </header>
@@ -213,6 +210,7 @@
                 <form id="project-form">
 
                     <div>
+
                         <label for="new-project-name">
                             Project Name
                         </label>
@@ -224,10 +222,12 @@
                             placeholder="Example: Career Report"
                             required
                         >
+
                     </div>
 
 
                     <div>
+
                         <label for="new-project-due-date">
                             Project Due Date
                         </label>
@@ -238,6 +238,7 @@
                             name="new-project-due-date"
                             required
                         >
+
                     </div>
 
 
@@ -274,6 +275,7 @@
                 <form id="task-form">
 
                     <div>
+
                         <label for="project-select">
                             Choose Project
                         </label>
@@ -287,10 +289,12 @@
                                 Choose a project
                             </option>
                         </select>
+
                     </div>
 
 
                     <div>
+
                         <label for="task-name">
                             Task Name
                         </label>
@@ -302,10 +306,12 @@
                             placeholder="What needs to be done?"
                             required
                         >
+
                     </div>
 
 
                     <div>
+
                         <label for="task-details">
                             Task Details
                         </label>
@@ -316,10 +322,12 @@
                             rows="3"
                             placeholder="Add optional details..."
                         ></textarea>
+
                     </div>
 
 
                     <div>
+
                         <label for="due-date">
                             Task Due Date
                         </label>
@@ -330,6 +338,7 @@
                             name="due-date"
                             required
                         >
+
                     </div>
 
 
@@ -353,6 +362,7 @@
             <div class="projects-heading">
 
                 <div>
+
                     <p class="section-label">
                         CURRENT WORK
                     </p>
@@ -360,7 +370,9 @@
                     <h2 id="projects-heading">
                         My Projects
                     </h2>
+
                 </div>
+
 
                 <p class="projects-message">
                     One step at a time.
